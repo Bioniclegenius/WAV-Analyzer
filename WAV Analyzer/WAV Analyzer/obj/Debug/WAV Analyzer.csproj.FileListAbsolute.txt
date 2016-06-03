@@ -1,0 +1,12 @@
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\bin\Debug\WAV Analyzer.exe.config
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\bin\Debug\WAV Analyzer.exe
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\bin\Debug\WAV Analyzer.pdb
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\obj\Debug\WAV Analyzer.csprojResolveAssemblyReference.cache
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\obj\Debug\WAV_Analyzer.Form1.resources
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\obj\Debug\WAV_Analyzer.Properties.Resources.resources
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\obj\Debug\WAV Analyzer.csproj.GenerateResource.Cache
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\obj\Debug\WAV Analyzer.exe
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\obj\Debug\WAV Analyzer.pdb
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\bin\Debug\NAudio.dll
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\bin\Debug\NAudio.WindowsMediaFormat.dll
+d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\bin\Debug\NAudio.xml
