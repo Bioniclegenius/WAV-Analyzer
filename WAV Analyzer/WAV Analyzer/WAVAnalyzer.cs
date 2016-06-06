@@ -16,14 +16,38 @@ namespace WAV_Analyzer {
     WaveOutEvent waveOut;
     WaveFileReader wavreader;
     List<double> ampgraph = new List<double>();
+    short numchannels;
+    int samplerate;
+    short bitspersample;
+    int minfreq = 27;
+    int maxfreq = 4187;
+    int firstbin, lastbin;
+    int FFTSize;
     public WAVAnalyzer(Size size) {
       Width=size.Width;
       Height=size.Height;
-      string filename = "..\\Mus_ruins.wav";
-      file=prepare(filename);
+      int pow = 13;//keep between 9 and 11 for best results
+      FFTSize=(int)(Math.Pow(2,pow));
+
+      //put files here, choose which one ot use
+      string[] files = { "12_-_Mabe_Village","Mus_ruins" };
+      int chosenfile = 1;
+
+
+      string filename = "..\\Music\\"+files[chosenfile]+".wav";
       filebytes=File.ReadAllBytes(filename);
       waveOut=new WaveOutEvent();
       wavreader=new WaveFileReader(filename);
+      file=prepare(filename);
+      for(int x = 0;x<FFTSize;x++) {
+        double freq = x*samplerate/FFTSize;
+        double prevfreq = (x-1)*samplerate/FFTSize;
+        if(prevfreq<minfreq&&freq>=minfreq)
+          firstbin=x;
+        if(prevfreq<=maxfreq&&freq>maxfreq)
+          lastbin=x;
+      }
+      double filemax = 0;
       for(int x = 0;x<Width;x++) {
         double max = 0;
         double total = 0;
@@ -37,11 +61,15 @@ namespace WAV_Analyzer {
             break;
           if(Math.Abs(file[y])>max)
             max=Math.Abs(file[y]);
+          if(Math.Abs(file[y])>filemax)
+            filemax=Math.Abs(file[y]);
           total+=Math.Abs(file[y]);
           count++;
         }
         total/=count;
-        ampgraph.Add(max*255);
+        double mult = Height/2;
+        mult/=filemax;
+        ampgraph.Add(total*mult);
       }
       waveOut.Init(wavreader);
       waveOut.Play();
@@ -64,7 +92,6 @@ namespace WAV_Analyzer {
       curtime=waveOut.GetPosition();
       curtime/=2;
       curtime+=44;
-      int FFTSize = 1024;
       Complex[] data = new Complex[FFTSize];
       for(int x = 0;x<FFTSize;x++) {
         if((int)(x+curtime+.5)<file.Length)
@@ -72,11 +99,19 @@ namespace WAV_Analyzer {
         else
           data[x]=new Complex(0,0);
       }
+      g.DrawString(Convert.ToString(bitspersample),f,b2,5,5);
+      for(int x = 0;x<FFTSize/2;x+=100) {
+      }
       FourierTransform.FFT(data,FourierTransform.Direction.Forward);
       List<string> lines = new List<string>();
-      for(int x = 0;x<=FFTSize/2;x++) {
+      for(int x = firstbin;x<=lastbin;x++) {
         float horiz = x*Width;
-        horiz/=FFTSize/2;
+        horiz/=lastbin-firstbin;
+        //new horiz calc
+        double freq = x*samplerate/FFTSize;
+        double numkey = 12*Math.Log(freq/440.0)/Math.Log(2)+49;
+        horiz=(float)(numkey*Width);
+        horiz/=88;
         double value = Math.Sqrt(Math.Pow(data[x].Re,2)+Math.Pow(data[x].Im,2));
         g.DrawLine(p3,horiz,Height,horiz,(float)(Height-value*10000));
         lines.Add(Convert.ToString(x)+" :\t"+Convert.ToString(data[x].Re)+"\n\t\t"+Convert.ToString(data[x].Im)+"\n\t\t"+Convert.ToString(value));
@@ -88,10 +123,13 @@ namespace WAV_Analyzer {
 
       return data;
     }*/
-    public static Double[] prepare(String wavePath) {
+    public Double[] prepare(String wavePath) {
       Double[] data;
       byte[] wave;
       byte[] sR = new byte[4];
+      numchannels = BitConverter.ToInt16(filebytes,22);
+      samplerate=BitConverter.ToInt32(filebytes,24);
+      bitspersample=BitConverter.ToInt16(filebytes,34);
       System.IO.FileStream WaveFile = System.IO.File.OpenRead(wavePath);
       wave=new byte[WaveFile.Length];
       data=new Double[(wave.Length-44)/2];//shifting the headers out of the PCM data;
@@ -100,9 +138,9 @@ namespace WAV_Analyzer {
       
       byte[] wavholder = new byte[2];
       for(int i = 0;i<data.Length;i++) {
-        wavholder[0]=wave[i*2+44];
-        wavholder[1]=wave[i*2+45];
-        data[i]=BitConverter.ToInt16(wavholder,0)/32768.0;
+        wavholder[0]=wave[i*numchannels+44];
+        wavholder[1]=wave[i*numchannels+45];
+        data[i]=BitConverter.ToInt16(wavholder,0)/Math.Pow(2,bitspersample);
       }
       //65536.0.0=2^n,       n=bits per sample;
 
