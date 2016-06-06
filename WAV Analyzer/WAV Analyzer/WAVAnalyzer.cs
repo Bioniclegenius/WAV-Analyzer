@@ -15,12 +15,12 @@ namespace WAV_Analyzer {
     int Width, Height;
     WaveOutEvent waveOut;
     WaveFileReader wavreader;
-    List<double> ampgraph = new List<double>();
+    List<PointF> ampgraph = new List<PointF>();
     short numchannels;
     int samplerate;
     short bitspersample;
-    int minfreq = 27;
-    int maxfreq = 4187;
+    int minfreq = 20;
+    int maxfreq = 13289;
     int firstbin, lastbin;
     int FFTSize;
     public WAVAnalyzer(Size size) {
@@ -30,8 +30,8 @@ namespace WAV_Analyzer {
       FFTSize=(int)(Math.Pow(2,pow));
 
       //put files here, choose which one ot use
-      string[] files = { "12_-_Mabe_Village","Mus_ruins" };
-      int chosenfile = 1;
+      string[] files = { "12_-_Mabe_Village","Mus_ruins","Undertale_-_079_-_Your_Best_Nightmare" };
+      int chosenfile = 2;
 
 
       string filename = "..\\Music\\"+files[chosenfile]+".wav";
@@ -50,26 +50,39 @@ namespace WAV_Analyzer {
       double filemax = 0;
       for(int x = 0;x<Width;x++) {
         double max = 0;
-        double total = 0;
-        double count = 0;
+        double min = 0;
+        double totalpos = 0;
+        double totalneg = 0;
+        double countpos = 0;
+        double countneg = 0;
         double szun = file.Length;
         szun/=Width;
         for(int y = (int)((x-1)*szun);y<x*szun;y++) {
-          if(y<44)
-            y=44;
+          if(y<0)
+            y=0;
           if(y>=file.Length)
             break;
-          if(Math.Abs(file[y])>max)
-            max=Math.Abs(file[y]);
+          if(file[y]>max)
+            max=file[y];
+          if(file[y]<min)
+            min=file[y];
           if(Math.Abs(file[y])>filemax)
             filemax=Math.Abs(file[y]);
-          total+=Math.Abs(file[y]);
-          count++;
+          if(file[y]>0) {
+            totalpos+=file[y];
+            countpos++;
+          }
+          if(file[y]<0) {
+            totalneg-=file[y];
+            countneg++;
+          }
         }
-        total/=count;
-        double mult = Height/2;
+        totalpos/=countpos;
+        totalneg/=countneg;
+        double mult = Height/4;
         mult/=filemax;
-        ampgraph.Add(total*mult);
+        //ampgraph.Add(new PointF((float)(max*mult),(float)(-min*mult)));
+        ampgraph.Add(new PointF((float)(totalpos*mult),(float)(totalneg*mult)));
       }
       waveOut.Init(wavreader);
       waveOut.Play();
@@ -87,7 +100,7 @@ namespace WAV_Analyzer {
       curtime/=file.Length*2;
       g.DrawLine(p2,(int)(curtime),Height/2+250,(int)(curtime),Height/2-250);
       for(int x = 0;x<ampgraph.Count();x++) {
-        g.DrawLine(p,x,(float)(Height/2-ampgraph[x]),x,(float)(Height/2+ampgraph[x]));
+        g.DrawLine(p,x,(float)(Height/2-ampgraph[x].X),x,(float)(Height/2+ampgraph[x].Y));
       }
       curtime=waveOut.GetPosition();
       curtime/=2;
@@ -111,7 +124,7 @@ namespace WAV_Analyzer {
         double freq = x*samplerate/FFTSize;
         double numkey = 12*Math.Log(freq/440.0)/Math.Log(2)+49;
         horiz=(float)(numkey*Width);
-        horiz/=88;
+        horiz/=108;
         double value = Math.Sqrt(Math.Pow(data[x].Re,2)+Math.Pow(data[x].Im,2));
         g.DrawLine(p3,horiz,Height,horiz,(float)(Height-value*10000));
         lines.Add(Convert.ToString(x)+" :\t"+Convert.ToString(data[x].Re)+"\n\t\t"+Convert.ToString(data[x].Im)+"\n\t\t"+Convert.ToString(value));
