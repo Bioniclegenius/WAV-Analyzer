@@ -15,6 +15,7 @@ namespace WAV_Analyzer {
     int Width, Height;
     WaveOutEvent waveOut;
     WaveFileReader wavreader;
+    List<double> ampgraph = new List<double>();
     public WAVAnalyzer(Size size) {
       Width=size.Width;
       Height=size.Height;
@@ -23,6 +24,25 @@ namespace WAV_Analyzer {
       filebytes=File.ReadAllBytes(filename);
       waveOut=new WaveOutEvent();
       wavreader=new WaveFileReader(filename);
+      for(int x = 0;x<Width;x++) {
+        double max = 0;
+        double total = 0;
+        double count = 0;
+        double szun = file.Length;
+        szun/=Width;
+        for(int y = (int)((x-1)*szun);y<x*szun;y++) {
+          if(y<44)
+            y=44;
+          if(y>=file.Length)
+            break;
+          if(Math.Abs(file[y])>max)
+            max=Math.Abs(file[y]);
+          total+=Math.Abs(file[y]);
+          count++;
+        }
+        total/=count;
+        ampgraph.Add(max*255);
+      }
       waveOut.Init(wavreader);
       waveOut.Play();
     }
@@ -38,27 +58,9 @@ namespace WAV_Analyzer {
       curtime*=Width;
       curtime/=file.Length*2;
       g.DrawLine(p2,(int)(curtime),Height/2+250,(int)(curtime),Height/2-250);
-      /*for(int x = 0;x<Width;x++) {
-        double max = 0;
-        double total = 0;
-        double count = 0;
-        double size = file.Length;
-        size/=Width;
-        for(int y = (int)((x-1)*size);y<x*size;y++) {
-          if(y<44)
-            y=44;
-          if(y>=file.Length)
-            break;
-          if(Math.Abs(file[y])>max)
-            max=Math.Abs(file[y]);
-          total+=Math.Abs(file[y]);
-          count++;
-        }
-        total/=count;
-        g.DrawLine(p,x,(int)(Height/2+max*255),x,(int)(Height/2-max*255));
-        //if(x==(int)(curtime+.5))
-        g.DrawString(Convert.ToString(BitConverter.ToInt16(filebytes,34)),f,b2,new PointF(5,5));
-      }*/
+      for(int x = 0;x<ampgraph.Count();x++) {
+        g.DrawLine(p,x,(float)(Height/2-ampgraph[x]),x,(float)(Height/2+ampgraph[x]));
+      }
       curtime=waveOut.GetPosition();
       curtime/=2;
       curtime+=44;
