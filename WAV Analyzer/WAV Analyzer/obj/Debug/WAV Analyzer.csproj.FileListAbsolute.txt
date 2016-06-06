@@ -10,3 +10,19 @@ d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\o
 d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\bin\Debug\NAudio.dll
 d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\bin\Debug\NAudio.WindowsMediaFormat.dll
 d:\david.berry\documents\visual studio 2015\Projects\WAV Analyzer\WAV Analyzer\bin\Debug\NAudio.xml
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\WAV Analyzer.exe.config
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\obj\Debug\WAV Analyzer.exe
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\obj\Debug\WAV Analyzer.pdb
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\WAV Analyzer.exe
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\WAV Analyzer.pdb
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\NAudio.dll
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\NAudio.WindowsMediaFormat.dll
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\NAudio.xml
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\obj\Debug\WAV Analyzer.csprojResolveAssemblyReference.cache
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\obj\Debug\WAV_Analyzer.Form1.resources
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\obj\Debug\WAV_Analyzer.Properties.Resources.resources
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\obj\Debug\WAV Analyzer.csproj.GenerateResource.Cache
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\AForge.Math.dll
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\AForge.dll
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\AForge.Math.xml
+D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\AForge.xml
