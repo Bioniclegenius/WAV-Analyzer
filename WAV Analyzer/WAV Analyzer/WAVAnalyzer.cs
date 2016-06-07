@@ -30,8 +30,9 @@ namespace WAV_Analyzer {
       FFTSize=(int)(Math.Pow(2,pow));
 
       //put files here, choose which one ot use
-      string[] files = { "12_-_Mabe_Village","Mus_ruins","Undertale_-_079_-_Your_Best_Nightmare" };
-      int chosenfile = 2;
+      string[] files = { "12_-_Mabe_Village","Mus_ruins","Undertale_-_079_-_Your_Best_Nightmare","Undertale_-_Megalovania",
+                         "Undertale_OST-_072_-_Song_That_Might_Play_When_You"};
+      int chosenfile = 3;
 
 
       string filename = "..\\Music\\"+files[chosenfile]+".wav";
@@ -79,7 +80,7 @@ namespace WAV_Analyzer {
         }
         totalpos/=countpos;
         totalneg/=countneg;
-        double mult = Height/4;
+        double mult = Height/2;
         mult/=filemax;
         //ampgraph.Add(new PointF((float)(max*mult),(float)(-min*mult)));
         ampgraph.Add(new PointF((float)(totalpos*mult),(float)(totalneg*mult)));
@@ -112,7 +113,7 @@ namespace WAV_Analyzer {
         else
           data[x]=new Complex(0,0);
       }
-      g.DrawString(Convert.ToString(bitspersample),f,b2,5,5);
+      g.DrawString(Convert.ToString(lastbin-firstbin),f,b2,5,5);
       for(int x = 0;x<FFTSize/2;x+=100) {
       }
       FourierTransform.FFT(data,FourierTransform.Direction.Forward);
@@ -126,7 +127,12 @@ namespace WAV_Analyzer {
         horiz=(float)(numkey*Width);
         horiz/=108;
         double value = Math.Sqrt(Math.Pow(data[x].Re,2)+Math.Pow(data[x].Im,2));
-        g.DrawLine(p3,horiz,Height,horiz,(float)(Height-value*10000));
+        double minmult = .75;
+        double maxmult = 17.0;
+        double scalemult = maxmult-minmult;
+        scalemult/=lastbin-firstbin;
+        double offset = minmult-firstbin*scalemult;
+        g.DrawLine(p3,horiz,Height,horiz,(float)(Height-value*10000*(x*scalemult+offset)));
         lines.Add(Convert.ToString(x)+" :\t"+Convert.ToString(data[x].Re)+"\n\t\t"+Convert.ToString(data[x].Im)+"\n\t\t"+Convert.ToString(value));
       }
       //File.WriteAllLines("Debug.txt",lines.ToArray());
