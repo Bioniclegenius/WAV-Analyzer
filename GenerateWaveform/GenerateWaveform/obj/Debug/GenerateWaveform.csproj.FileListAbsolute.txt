@@ -1,0 +1,6 @@
+d:\david.berry\documents\visual studio 2015\Projects\GenerateWaveform\GenerateWaveform\bin\Debug\GenerateWaveform.exe.config
+d:\david.berry\documents\visual studio 2015\Projects\GenerateWaveform\GenerateWaveform\bin\Debug\GenerateWaveform.exe
+d:\david.berry\documents\visual studio 2015\Projects\GenerateWaveform\GenerateWaveform\bin\Debug\GenerateWaveform.pdb
+d:\david.berry\documents\visual studio 2015\Projects\GenerateWaveform\GenerateWaveform\obj\Debug\GenerateWaveform.csprojResolveAssemblyReference.cache
+d:\david.berry\documents\visual studio 2015\Projects\GenerateWaveform\GenerateWaveform\obj\Debug\GenerateWaveform.exe
+d:\david.berry\documents\visual studio 2015\Projects\GenerateWaveform\GenerateWaveform\obj\Debug\GenerateWaveform.pdb

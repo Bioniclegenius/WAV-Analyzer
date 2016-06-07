@@ -1,10 +1,10 @@
 File to load in ..\Music:
-12_-_Mabe_Village
+Mus_ruins
 
 Minfrequency:
 20
-Maxfrequency:
-13289
+Maxfrequency: (piano tops at 4187, octave up is 7459, two octaves up is 13290)
+4187
 
 Resolution of the FFT (keep between 9 and 11 for best results, 13 generally is max):
 13

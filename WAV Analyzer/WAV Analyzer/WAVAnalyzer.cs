@@ -25,6 +25,7 @@ namespace WAV_Analyzer {
     double highscale = 17;
     int firstbin, lastbin;
     int FFTSize;
+    int numbernotes;
     public WAVAnalyzer(Size size) {
       Width=size.Width;
       Height=size.Height;
@@ -45,13 +46,20 @@ namespace WAV_Analyzer {
       wavreader=new WaveFileReader(filename);
       file=prepare(filename);
       for(int x = 0;x<FFTSize;x++) {
-        double freq = x*samplerate/FFTSize;
-        double prevfreq = (x-1)*samplerate/FFTSize;
+        double freq = x*samplerate;
+        freq/=FFTSize;
+        double prevfreq = (x-1)*samplerate;
+        prevfreq/=FFTSize;
         if(prevfreq<minfreq&&freq>=minfreq)
           firstbin=x;
         if(prevfreq<=maxfreq&&freq>maxfreq)
           lastbin=x;
       }
+      if(lastbin>FFTSize/2)
+        lastbin=FFTSize/2;
+      double highfreq = lastbin*samplerate;
+      highfreq/=FFTSize;
+      numbernotes=(int)(12*Math.Log(highfreq/440.0)/Math.Log(2)+49);
       double filemax = 0;
       for(int x = 0;x<Width;x++) {
         double max = 0;
@@ -117,7 +125,7 @@ namespace WAV_Analyzer {
         else
           data[x]=new Complex(0,0);
       }
-      g.DrawString(Convert.ToString(lastbin-firstbin),f,b2,5,5);
+      g.DrawString(Convert.ToString(lastbin)+" "+Convert.ToString(FFTSize/2),f,b2,5,5);
       for(int x = 0;x<FFTSize/2;x+=100) {
       }
       FourierTransform.FFT(data,FourierTransform.Direction.Forward);
@@ -126,24 +134,20 @@ namespace WAV_Analyzer {
         float horiz = x*Width;
         horiz/=lastbin-firstbin;
         //new horiz calc
-        double freq = x*samplerate/FFTSize;
+        double freq = x*samplerate;
+        freq/=FFTSize;
         double numkey = 12*Math.Log(freq/440.0)/Math.Log(2)+49;
         horiz=(float)(numkey*Width);
-        horiz/=108;
+        horiz/=numbernotes;
         double value = Math.Sqrt(Math.Pow(data[x].Re,2)+Math.Pow(data[x].Im,2));
         double scalemult = highscale-lowscale;
         scalemult/=lastbin-firstbin;
         double offset = lowscale-firstbin*scalemult;
         g.DrawLine(p3,horiz,Height,horiz,(float)(Height-value*10000*(x*scalemult+offset)));
-        lines.Add(Convert.ToString(x)+" :\t"+Convert.ToString(data[x].Re)+"\n\t\t"+Convert.ToString(data[x].Im)+"\n\t\t"+Convert.ToString(value));
+        //lines.Add(Convert.ToString(x)+" :\t"+Convert.ToString(data[x].Re)+"\n\t\t"+Convert.ToString(data[x].Im)+"\n\t\t"+Convert.ToString(value));
       }
       //File.WriteAllLines("Debug.txt",lines.ToArray());
     }
-    /*public static Double[] read(String wavePath) {
-      Double[] data;
-
-      return data;
-    }*/
     public Double[] prepare(String wavePath) {
       Double[] data;
       byte[] wave;
@@ -153,7 +157,7 @@ namespace WAV_Analyzer {
       bitspersample=BitConverter.ToInt16(filebytes,34);
       System.IO.FileStream WaveFile = System.IO.File.OpenRead(wavePath);
       wave=new byte[WaveFile.Length];
-      data=new Double[(wave.Length-44)/2];//shifting the headers out of the PCM data;
+      data=new Double[(wave.Length-44)/numchannels];//shifting the headers out of the PCM data;
       WaveFile.Read(wave,0,Convert.ToInt32(WaveFile.Length));//read the wave file into the wave variable
                                                              /***********Converting and PCM accounting***************/
       
