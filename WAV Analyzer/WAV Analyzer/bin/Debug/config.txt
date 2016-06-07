@@ -1,0 +1,15 @@
+File to load in ..\Music:
+12_-_Mabe_Village
+
+Minfrequency:
+20
+Maxfrequency:
+13289
+
+Resolution of the FFT (keep between 9 and 11 for best results, 13 generally is max):
+13
+
+Low-end multiplier:
+.75
+High-end multiplier:
+17.0

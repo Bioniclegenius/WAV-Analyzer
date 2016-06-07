@@ -24,5 +24,4 @@ D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\obj\Debug
 D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\obj\Debug\WAV Analyzer.csproj.GenerateResource.Cache
 D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\AForge.Math.dll
 D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\AForge.dll
-D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\AForge.Math.xml
 D:\david.berry\Documents\GitHub\WAV-Analyzer\WAV Analyzer\WAV Analyzer\bin\Debug\AForge.xml

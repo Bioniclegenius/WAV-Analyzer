@@ -21,21 +21,25 @@ namespace WAV_Analyzer {
     short bitspersample;
     int minfreq = 20;
     int maxfreq = 13289;
+    double lowscale = .75;
+    double highscale = 17;
     int firstbin, lastbin;
     int FFTSize;
     public WAVAnalyzer(Size size) {
       Width=size.Width;
       Height=size.Height;
-      int pow = 13;//keep between 9 and 11 for best results
-      FFTSize=(int)(Math.Pow(2,pow));
 
       //put files here, choose which one ot use
-      string[] files = { "12_-_Mabe_Village","Mus_ruins","Undertale_-_079_-_Your_Best_Nightmare","Undertale_-_Megalovania",
-                         "Undertale_OST-_072_-_Song_That_Might_Play_When_You"};
-      int chosenfile = 3;
+      string[] config = File.ReadAllLines("config.txt");
 
 
-      string filename = "..\\Music\\"+files[chosenfile]+".wav";
+      string filename = "..\\Music\\"+config[1]+".wav";
+      minfreq=Convert.ToInt32(config[4]);
+      maxfreq=Convert.ToInt32(config[6]);
+      int pow=Convert.ToInt32(config[9]);//keep between 9 and 11 for best results, 13 at max
+      lowscale=Convert.ToDouble(config[12]);
+      highscale=Convert.ToDouble(config[14]);
+      FFTSize=(int)(Math.Pow(2,pow));
       filebytes=File.ReadAllBytes(filename);
       waveOut=new WaveOutEvent();
       wavreader=new WaveFileReader(filename);
@@ -127,11 +131,9 @@ namespace WAV_Analyzer {
         horiz=(float)(numkey*Width);
         horiz/=108;
         double value = Math.Sqrt(Math.Pow(data[x].Re,2)+Math.Pow(data[x].Im,2));
-        double minmult = .75;
-        double maxmult = 17.0;
-        double scalemult = maxmult-minmult;
+        double scalemult = highscale-lowscale;
         scalemult/=lastbin-firstbin;
-        double offset = minmult-firstbin*scalemult;
+        double offset = lowscale-firstbin*scalemult;
         g.DrawLine(p3,horiz,Height,horiz,(float)(Height-value*10000*(x*scalemult+offset)));
         lines.Add(Convert.ToString(x)+" :\t"+Convert.ToString(data[x].Re)+"\n\t\t"+Convert.ToString(data[x].Im)+"\n\t\t"+Convert.ToString(value));
       }
