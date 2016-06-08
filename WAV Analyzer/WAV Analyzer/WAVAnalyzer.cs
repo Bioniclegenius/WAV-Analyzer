@@ -92,10 +92,20 @@ namespace WAV_Analyzer {
         }
         totalpos/=countpos;
         totalneg/=countneg;
-        double mult = Height/2;
-        mult/=filemax;
         //ampgraph.Add(new PointF((float)(max*mult),(float)(-min*mult)));
-        ampgraph.Add(new PointF((float)(totalpos*mult),(float)(totalneg*mult)));
+        ampgraph.Add(new PointF((float)(totalpos),(float)(totalneg)));
+      }
+      float highestpoint = 0;
+      for(int x = 0;x<ampgraph.Count();x++) {
+        if(ampgraph[x].X>highestpoint)
+          highestpoint=ampgraph[x].X;
+        if(ampgraph[x].Y<-1*highestpoint)
+          highestpoint=-1*ampgraph[x].Y;
+      }
+      float mult = Height/8;
+      mult/=highestpoint;
+      for(int x = 0;x<ampgraph.Count();x++) {
+        ampgraph[x]=new PointF(ampgraph[x].X*mult,ampgraph[x].Y*mult);
       }
       waveOut.Init(wavreader);
       waveOut.Play();
@@ -125,7 +135,7 @@ namespace WAV_Analyzer {
         else
           data[x]=new Complex(0,0);
       }
-      g.DrawString(Convert.ToString(lastbin)+" "+Convert.ToString(FFTSize/2),f,b2,5,5);
+      //g.DrawString(Convert.ToString(lastbin)+" "+Convert.ToString(FFTSize/2),f,b2,5,5);
       for(int x = 0;x<FFTSize/2;x+=100) {
       }
       FourierTransform.FFT(data,FourierTransform.Direction.Forward);

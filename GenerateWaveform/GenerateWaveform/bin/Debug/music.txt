@@ -1,0 +1,23 @@
+;tempo 12
+
+c4 .c  .e  .g  .g  .    g5 .g  .    e  .e  .    
+
+c4 .c  .e  .g  .g  .    g5 .g  .    f  .f  .    
+
+b4 .b  .d  .a5 .a  .    a6 .a  .    f5 .f  .    
+
+b4 .b  .d  .a5 .a  .    a6 .a  .    g5 .g  .    
+
+c4 .c  .e  .g  .c5 .    c6 .c  .    g5 .g  .    
+
+c4 .c  .e  .g  .c5 .    c6 .c  .    a  .a  .    
+
+;tempo 6
+
+d4 .d  .f  .a5 .
+
+;tempo 12
+
+a              .F4 .g  .e5             .c  .
+
+g4 .e4     .d  .a5     .g4 .c  .e  .g  .c5 .

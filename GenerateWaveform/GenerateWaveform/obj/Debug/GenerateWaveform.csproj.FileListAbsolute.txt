@@ -4,3 +4,9 @@ d:\david.berry\documents\visual studio 2015\Projects\GenerateWaveform\GenerateWa
 d:\david.berry\documents\visual studio 2015\Projects\GenerateWaveform\GenerateWaveform\obj\Debug\GenerateWaveform.csprojResolveAssemblyReference.cache
 d:\david.berry\documents\visual studio 2015\Projects\GenerateWaveform\GenerateWaveform\obj\Debug\GenerateWaveform.exe
 d:\david.berry\documents\visual studio 2015\Projects\GenerateWaveform\GenerateWaveform\obj\Debug\GenerateWaveform.pdb
+D:\david.berry\Documents\GitHub\WAV-Analyzer\GenerateWaveform\GenerateWaveform\bin\Debug\GenerateWaveform.exe.config
+D:\david.berry\Documents\GitHub\WAV-Analyzer\GenerateWaveform\GenerateWaveform\obj\Debug\GenerateWaveform.exe
+D:\david.berry\Documents\GitHub\WAV-Analyzer\GenerateWaveform\GenerateWaveform\obj\Debug\GenerateWaveform.pdb
+D:\david.berry\Documents\GitHub\WAV-Analyzer\GenerateWaveform\GenerateWaveform\bin\Debug\GenerateWaveform.exe
+D:\david.berry\Documents\GitHub\WAV-Analyzer\GenerateWaveform\GenerateWaveform\bin\Debug\GenerateWaveform.pdb
+D:\david.berry\Documents\GitHub\WAV-Analyzer\GenerateWaveform\GenerateWaveform\obj\Debug\GenerateWaveform.csprojResolveAssemblyReference.cache
