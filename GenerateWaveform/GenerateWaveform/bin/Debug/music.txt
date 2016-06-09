@@ -1,16 +1,18 @@
 ;tempo 12
 
-c4 .c  .e  .g  .g  .    g5 .g  .    e  .e  .    
+.   
 
-c4 .c  .e  .g  .g  .    g5 .g  .    f  .f  .    
+c4 .c  .e  .g  .g  .    g5 .g  .    e  .e  .   .
 
-b4 .b  .d  .a5 .a  .    a6 .a  .    f5 .f  .    
+c4 .c  .e  .g  .g  .    g5 .g  .    f  .f  .   .
 
-b4 .b  .d  .a5 .a  .    a6 .a  .    g5 .g  .    
+b4 .b  .d  .a5 .a  .    a6 .a  .    f5 .f  .   .
 
-c4 .c  .e  .g  .c5 .    c6 .c  .    g5 .g  .    
+b4 .b  .d  .a5 .a  .    a6 .a  .    g5 .g  .   .
 
-c4 .c  .e  .g  .c5 .    c6 .c  .    a  .a  .    
+c4 .c  .e  .g  .c5 .    c6 .c  .    g5 .g  .   .
+
+c4 .c  .e  .g  .c5 .    c6 .c  .    a  .a  .   .
 
 ;tempo 6
 
@@ -20,4 +22,19 @@ d4 .d  .f  .a5 .
 
 a              .F4 .g  .e5             .c  .
 
-g4 .e4     .d  .a5     .g4 .c  .e  .g  .c5 .
+g4 .e4     .d  .a5     .g4 .c  .  c.c  .c  .   .
+
+.          .
+
+;tempo 4
+
+g  .g  .f  .e  .
+
+;tempo 12
+
+g    .  g5 .g  .    e  .e  .   .
+
+g4 .g  .f  .e  .g  .    g5 .g  .    f  .f  .   .
+
+
+
